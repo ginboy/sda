@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>todolist</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+				background-color: #C3C3C2;
+			}
+			input:focus{
+				outline:none;
+			}
+			input{
+				border: none;
+			}
+			#app{
+				width: 100%;
+			}
+			.box,.cotainer{
+				width: 1200px;
+				margin: 0 auto;
+			}
+			.header{
+				line-height: 80px;
+				background-color: #000000;
+				color: #ffffff;
+			}
+			.fl{
+				float: left;
+			}
+			.left{
+				font-size: 40px;
+				font-weight: 600;
+				margin: 0 10px;
+			}
+			.right1{
+				height: 40px;
+				width: 600px;
+				border-radius: 10px;
+				padding-left: 10px;
+				font-size: 20px;
+				vertical-align: middle;
+			}
+			.right2{
+				height: 40px;
+				width: 60px;
+				margin-left: 15px;
+				font-size: 20px;
+				vertical-align: middle;
+			}
+			.rl{
+				float: right;
+			}
+			.clfl::after{
+				content: '';
+				clear: both;
+				display: inline-block;
+			}
+			.first{
+				line-height: 80px;
+				font-size: 30px;
+				font-weight: 800;
+			}
+			.num{
+				background-color:lightblue;
+				border-radius: 50%;
+				height: 50px;
+				width: 50px;
+				text-align: center;
+				margin-top: 15px;
+				margin-right: 10px;
+				line-height: 50px;
+			}
+			.listindex{
+				width: 80%;
+				font-size: 20px;
+				line-height: 30px;
+				margin: 10px 0px;
+				padding: 0 15px;
+				border-radius: 5px;
+				background-color: #ADD8E6;
+			}
+			.listindex:hover{
+				background-color: cornflowerblue;
+				margin-left: 10px;
+				transition: all 0.4s;
+			}
+			.listdelete{
+				width: 60px;
+				background-color: aquamarine;
+				margin: 10px 0px;
+				font-size: 20px;
+				border: 1px solid transparent;  
+				outline: none;    
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="header clfl">
+				<div class="box">
+					<div class="left fl">ToDoList</div>
+						<div class="right rl">
+							<input class="right1" placeholder="请输入代办事项" v-model="inputValue">
+							<button class="right2" @click="add">提交</button>
+						</div>
+				</div>
+			</div>
+			<div class="cotainer">
+				<div class="content">
+					<div class="first clfl">
+						<div class="title fl">正在进行</div>
+						<div class="num rl">{{total}}</div>
+					</div>
+					<div class="list clfl" v-for="(item,index) in list">
+						<div class="listindex fl">{{item}}</div>
+						<button class="listdelete rl" @click="itemdelete(index)">删除</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="./js/vue.min.js" ></script>
+		<script>
+			var app=new Vue({
+				el:'#app',    //实例负责管理的区域 ：id为app的区域，
+				data:{
+					msg:'hello world',
+					inputValue:"",
+					list:['去取经路上抓唐僧','高老庄的妹纸该成熟了','等天气转凉就去高老庄','背媳妇']
+				},
+				computed:{
+					total:function(){
+						return this.list.length
+					}
+				},
+				methods:{
+					//增加未完成列表
+					add:function(){
+						if(this.inputValue==''){
+							alert('请输入内容')
+						}else{
+							this.list.push(this.inputValue)
+							this.inputValue=''
+						}
+					},
+					//删除对应列表
+					itemdelete:function(val){
+						this.list.splice(val,1)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

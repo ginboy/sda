@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./js/vue.min.js" ></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div>{{msg}}</div>
+			<input class="right1" >
+		</div>
+		
+		<script>
+			var app=new Vue({
+				el:'#app',    //实例负责管理的区域 ：id为app的区域，
+				data:{
+					msg:'hello world'
+				}
+			})
+			setTimeout(function(){   //想要在vue实例外操作vue中的数据，app.$data
+				app.$data.msg='两秒之后，vue实例中的数据msg变更为这个'
+			},2000)
+		</script>
+	</body>
+</html>
